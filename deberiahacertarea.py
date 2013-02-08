@@ -18,13 +18,20 @@ def generar(porcent, largo, numpal):
         nuevas.append(transmicion(palabras[i], float(argv[4]), float(argv[5])))
         print palabras[i]
     print "Transmitiendo..."
-    for i in range(len(nuevas)):
-        print nuevas[i]
+    k=0
+    for i in nuevas:
+        error = 0
+        for j in i:
+            if j != palabras[k]:
+                print j, "es diferente de ", palabras[k]
+                error+=1
+        k+=1
+        print i, "Errores: ", error
 
 def transmicion(palabra, cero, uno):
     nueva = []
     x = 0
-    while x<= int(argv[6]):
+    while x< int(argv[6]):
         npal=""
         for caracter in palabra:
             if caracter == "0":
@@ -40,6 +47,7 @@ def transmicion(palabra, cero, uno):
         nueva.append(npal)
         x+=1
     return nueva
+
 if len(argv)!=7:
     print "1 - Porcentaje 0 y 1"
     print "2 - Largo de palabra"
