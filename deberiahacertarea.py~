@@ -7,7 +7,7 @@ def generar(porcent, largo, numpal):
     x = 0
     while x < numpal:
         palabra=""
-        for i in range((largo+1)**2):
+        for i in range(largo):
             if random.random() < porcent:
                 palabra+="0"
             else:
@@ -26,7 +26,7 @@ def generar(porcent, largo, numpal):
                 #print j, "es diferente de ", palabras[k]
                 error+=1
         k+=1
-        print largo, porcent, error*.1
+        print largo, error *.1
 
 def transmicion(palabra, cero, uno):
     nueva = []
