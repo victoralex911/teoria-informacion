@@ -1,0 +1,5 @@
+palabra = "1101"
+d = []
+for bit in palabra:
+    d.append(bit)
+print d

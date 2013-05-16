@@ -29,6 +29,5 @@ def tipico(nombre, rango):
 
 for i in range(int(argv[1])):
     iter = int(argv[2])
-    peor("PEOR_"+str(i), iter)
     tipico("TIPICO_"+str(i), iter)
     iter = iter**2

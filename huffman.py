@@ -1,5 +1,6 @@
 import collections
 from sys import argv
+import time
 
 class Nodo:
     def __init__(self, char, frec):
@@ -94,6 +95,20 @@ def leer():
             pass
     return bintext
 
+def dividir(palabra, rango):
+    palabras = []
+    current = ""
+    counter = 0
+    for char in palabra:
+        current += char
+        counter += 1
+        if counter == rango:
+            counter = 0
+            palabras.append(current)
+            current = ""
+    palabras.append(current)
+    return palabras
+
 def imprimir(nodo, string):
     string+=nodo.dir
     try:
@@ -110,13 +125,27 @@ nodos = []
 count_nodos = []
 binarios = {}
 valores = {}
+tiempo1 = time.time()
+listas = dividir(original,20)
 
-for char in original:
-    if char not in count_nodos:
-        count_nodos.append(char)
-        nodos.append(Nodo(char, original.count(char)))
-nodos = ordenar_nodos(nodos)
-nodo = tree(nodos)
+if argv[2]== "adap":
+    for palabra in listas:
+        for char in palabra:
+            if char not in count_nodos:
+                count_nodos.append(char)
+                nodos.append(Nodo(char, palabra.count(char)))
+                nodos = ordenar_nodos(nodos)
+        nodo = tree(nodos)
+
+elif argv[2]=="norm":
+    for char in original:
+        if char not in count_nodos:
+            count_nodos.append(char)
+            nodos.append(Nodo(char, original.count(char)))
+
+    nodos = ordenar_nodos(nodos)
+    nodo = tree(nodos)
+
 
 imprimir(nodo.nodo_izq, "")
 imprimir(nodo.nodo_der, "")
@@ -127,7 +156,8 @@ for char in original:
 guardar(binario)
 
 texto2 = bin_to_text(binario)
-
-print "Longitud original:",len(original)
-print "Longitud despues:",len(texto2)
-print "Longitud de bytes:",len(binario)/8
+tiempo2 = time.time()
+print "Longitud de bytes original:",len(original)
+print "Longitud de bytes compreso:",len(binario)/8
+print "Radio de compresion:", float(len(binario)/8)/float(len(original))*100
+print "Tiempo total:",tiempo2-tiempo1

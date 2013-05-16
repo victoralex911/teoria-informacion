@@ -128,7 +128,9 @@ guardar(binario)
 
 texto2 = bin_to_text(binario)
 tiempo2 = time.time()
-print "Longitud de bytes original:",len(original)
-print "Longitud de bytes compreso:",len(binario)/8
-print "Radio de compresion:", float(len(binario)/8)/float(len(original))
-print "Tiempo total:",tiempo2-tiempo1
+#print "Longitud de bytes original:",len(original)
+#print "Longitud de bytes compreso:",len(binario)/8
+#print "Radio de compresion:", float(len(binario)/8)/float(len(original))
+#print "Tiempo total:",tiempo2-tiempo1
+
+print (float(len(binario)/8)/float(len(original)))*100, tiempo2-tiempo1

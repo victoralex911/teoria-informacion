@@ -1,29 +1,36 @@
-from random import shuffle, random, randint
+from random import shuffle, random, choice
 from sys import argv
 
 lista = "abcdefghijklmnopqrstuvwxyz"
 
-def peor():
-    PEOR = ""
-    peor = []
-    for char in lista:
-        for i in range(int(argv[1])):
-            peor.append(char)
-    shuffle(peor, random)
-    for char in peor:
-        PEOR+=char
-    file = open("PEOR.txt", "w")
-    file.write(PEOR)
-    file.close()
+def peor(nombre, rango):
+    iter = 10
+    for j in iter:
+        PEOR = ""
+        peor = []
+        for char in lista:
+            for i in range(rango)):
+                peor.append(char)
+        shuffle(peor, random)
+        for char in peor:
+            PEOR+=char
+        file = open(nombre+"_"+str(j), "w")
+        file.write(PEOR)
+        file.close()
 
-def tipico():
-    TIPICO = ""
-    for i in range(len(lista)):
-        for j in range(int(argv[1])):
-            TIPICO += lista[randint(0, 25)]
-    file = open("TIPICO.txt", "w")
-    file.write(TIPICO)
-    file.close()
+def tipico(nombre, rango):
+    iter = 10
+    for j in iter:
+        TIPICO = ""
+        for i in range(len(lista)):
+            for j in range(rango):
+                TIPICO += choice(lista)
+        file = open(nombre+"_"+str(j), "w")
+        file.write(TIPICO)
+        file.close()
 
-peor()
-tipico()
+for i in range(argv[1]):
+    iter = int(argv[2])
+    peor("PEOR_"+str(i)+".txt", iter)
+    tipico("TIPICO_"+str(i)+".txt", iter)
+    iter = iter**2

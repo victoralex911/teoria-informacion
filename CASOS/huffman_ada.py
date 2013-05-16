@@ -95,6 +95,20 @@ def leer():
             pass
     return bintext
 
+def dividir(palabra, rango):
+    palabras = []
+    current = ""
+    counter = 0
+    for char in palabra:
+        current += char
+        counter += 1
+        if counter == rango:
+            counter = 0
+            palabras.append(current)
+            current = ""
+    palabras.append(current)
+    return palabras
+
 def imprimir(nodo, string):
     string+=nodo.dir
     try:
@@ -112,12 +126,28 @@ count_nodos = []
 binarios = {}
 valores = {}
 tiempo1 = time.time()
-for char in original:
-    if char not in count_nodos:
-        count_nodos.append(char)
-        nodos.append(Nodo(char, original.count(char)))
-nodos = ordenar_nodos(nodos)
-nodo = tree(nodos)
+listas = dividir(original,int(argv[2]))
+
+#print listas
+if argv[3]== "adap":
+    for palabra in listas:
+        for char in palabra:
+            if char not in count_nodos:
+                count_nodos.append(char)
+                nodos.append(Nodo(char, palabra.count(char)))
+                nodos = ordenar_nodos(nodos)
+        nodo = tree(nodos)
+
+elif argv[2]=="norm":
+    for char in original:
+        if char not in count_nodos:
+            count_nodos.append(char)
+            nodos.append(Nodo(char, original.count(char)))
+
+    nodos = ordenar_nodos(nodos)
+    nodo = tree(nodos)
+
+
 imprimir(nodo.nodo_izq, "")
 imprimir(nodo.nodo_der, "")
 
@@ -128,7 +158,6 @@ guardar(binario)
 
 texto2 = bin_to_text(binario)
 tiempo2 = time.time()
-print "Longitud de bytes original:",len(original)
-print "Longitud de bytes compreso:",len(binario)/8
-print "Radio de compresion:", float(len(binario)/8)/float(len(original))
-print "Tiempo total:",tiempo2-tiempo1
+#print original
+#print texto2
+print argv[2], tiempo2-tiempo1
